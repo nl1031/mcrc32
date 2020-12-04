@@ -5,10 +5,11 @@
  *      Author: ln
  */
 
-#include <zlib.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "crc32.h"
 
 #define MAXSIZE 1024*256
 
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
 	memset(buf,0,sizeof(buf));
 
 	rc = fread(buf, sizeof(unsigned char), MAXSIZE, infile);
-	crc32_checksum = crc32(0,buf, rc - 4);
+	crc32_checksum = crc32(buf, rc - 4);
 	printf("%x\n",crc32_checksum);
 	fclose(infile);
 
